@@ -1,47 +1,63 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Chá Julino Rafaela e Rafael</title>
   <style>
     body {
+      margin: 0;
+      padding: 0;
       font-family: 'Segoe UI', sans-serif;
       background-color: #171a4a;
-      color: #f1f1f1;
-      margin: 0;
-      padding: 20px;
-      background-image: radial-gradient(#ffd70033 1px, transparent 1px);
-      background-size: 40px 40px;
+      color: #fff;
+      overflow-x: hidden;
     }
     header {
       text-align: center;
-      margin-bottom: 30px;
+      padding: 30px 20px;
+      position: relative;
     }
     header img {
-      width: 150px;
-      margin-bottom: 10px;
+      width: 120px;
+      height: auto;
     }
     h1 {
-      color: #ffd700;
       font-size: 2.5rem;
+      color: #ffd700;
+      margin: 10px 0 0 0;
+    }
+    .glow {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle, rgba(255,215,0,0.15) 1px, transparent 1px);
+      background-size: 50px 50px;
+      pointer-events: none;
+      z-index: 0;
+    }
+    main {
+      padding: 20px;
+      max-width: 700px;
+      margin: 0 auto;
     }
     h2 {
-      margin-top: 30px;
+      color: #ffe066;
       border-bottom: 2px solid #ffd700;
       padding-bottom: 5px;
-      color: #ffe066;
     }
     ul {
       list-style: none;
-      padding-left: 0;
+      padding: 0;
     }
     li {
-      background-color: #1b263b;
-      border: 1px solid #415a77;
-      margin: 8px 0;
+      background-color: #1b1f4a;
+      border: 1px solid #ffd70055;
+      margin-bottom: 10px;
       padding: 12px;
-      border-radius: 10px;
+      border-radius: 8px;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -49,38 +65,67 @@
     }
     button {
       background-color: #ffd700;
-      color: #0d1b2a;
-      font-weight: bold;
+      color: #171a4a;
       border: none;
-      padding: 6px 12px;
+      padding: 8px 12px;
       border-radius: 5px;
+      font-weight: bold;
       cursor: pointer;
-      transition: background-color 0.3s;
-    }
-    button:hover:not(:disabled) {
-      background-color: #ffcc00;
     }
     button:disabled {
       background-color: #888;
       color: #ccc;
       cursor: not-allowed;
     }
+    .cadastro {
+      margin-bottom: 30px;
+      background-color: #1b1f4a;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 15px #ffd70044;
+    }
+    .cadastro label {
+      display: block;
+      margin: 10px 0 5px;
+      font-weight: bold;
+    }
+    .cadastro input {
+      width: 100%;
+      padding: 8px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
   </style>
 </head>
 <body>
+  <div class="glow"></div>
   <header>
-    <img src="WhatsApp Image 2025-06-16 at 20.34.09.jpeg" alt="Logo R&R">
+    <img src="WhatsApp%20Image%202025-06-16%20at%2020.34.09.jpeg" alt="Logo RR">
     <h1>Chá Julino Rafaela e Rafael</h1>
   </header>
 
-  <h2>Cozinha</h2>
-  <ul id="cozinha"></ul>
+  <main>
+    <div class="cadastro">
+      <h2>Identifique-se para escolher um presente 🎁</h2>
+      <label for="nome">Nome:</label>
+      <input type="text" id="nome">
+      <label for="email">Email:</label>
+      <input type="email" id="email">
+      <label for="celular">Celular:</label>
+      <input type="tel" id="celular">
+      <br><br>
+      <button onclick="liberarEscolhas()">Confirmar</button>
+    </div>
 
-  <h2>Banheiro</h2>
-  <ul id="banheiro"></ul>
+    <h2>Cozinha</h2>
+    <ul id="cozinha"></ul>
 
-  <h2>Sala</h2>
-  <ul id="sala"></ul>
+    <h2>Banheiro</h2>
+    <ul id="banheiro"></ul>
+
+    <h2>Sala</h2>
+    <ul id="sala"></ul>
+  </main>
 
   <script>
     const listaPresentes = {
@@ -116,24 +161,41 @@
         "Cadeira",
         "Rede",
         "Quadro decorativo",
-      ],
+      ]
     };
 
     function renderList(categoria, containerId) {
       const ul = document.getElementById(containerId);
       listaPresentes[categoria].forEach((item) => {
         const li = document.createElement("li");
-        li.innerHTML = `
-          <span>${item}</span>
-          <button onclick="marcarEscolhido(this)">Escolher</button>
-        `;
+        const btn = document.createElement("button");
+        btn.textContent = "Escolher";
+        btn.disabled = true;
+        btn.onclick = function () {
+          btn.textContent = "Escolhido";
+          btn.disabled = true;
+        };
+        li.innerHTML = `<span>${item}</span>`;
+        li.appendChild(btn);
         ul.appendChild(li);
       });
     }
 
-    function marcarEscolhido(button) {
-      button.disabled = true;
-      button.textContent = "Escolhido";
+    function liberarEscolhas() {
+      const nome = document.getElementById('nome').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const celular = document.getElementById('celular').value.trim();
+
+      if (nome && email && celular) {
+        document.querySelectorAll('button').forEach(btn => {
+          if (btn.textContent === 'Escolher') {
+            btn.disabled = false;
+          }
+        });
+        alert('Cadastro realizado com sucesso! Agora você pode escolher um presente.');
+      } else {
+        alert('Por favor, preencha todos os campos para continuar.');
+      }
     }
 
     renderList("cozinha", "cozinha");
