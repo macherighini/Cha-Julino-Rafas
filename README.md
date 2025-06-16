@@ -1,28 +1,3 @@
-# Cha-Julino-Rafas
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Chá Julino Rafaela e Rafael</title>
-
-  <!-- Fonte cursiva dourada para o título -->
-  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet" />
-
-  <style>
-    /* Fundo azul marinho */
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      background-color: #0d1b2a;
-      color: #f1f1f1;
-      margin: 0;
-      padding: 20px;
-      background-image: radial-gradient(#ffd70033 1px, transparent 1px);
-      background-size: 40px 40px;
-      overflow-x: hidden;
-      position: relative;
-      min-height: 100vh;
-    }
 
     /* Luzes douradas estilo Enrolados (animação suave) */
     body::before {
