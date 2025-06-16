@@ -65,59 +65,22 @@
       color: #ccc;
       cursor: not-allowed;
     }
-    .cadastro {
-      margin: 30px auto;
-      max-width: 400px;
-      padding: 20px;
-      background-color: #1b263b;
-      border-radius: 10px;
-      box-shadow: 0 0 15px #ffd70055;
-    }
-    .cadastro h2 {
-      text-align: center;
-    }
-    .cadastro input {
-      width: 100%;
-      padding: 10px;
-      margin: 10px 0;
-      border-radius: 5px;
-      border: none;
-      font-size: 1rem;
-    }
-    .cadastro button {
-      width: 100%;
-      margin-top: 10px;
-    }
-    .disabled {
-      pointer-events: none;
-      opacity: 0.5;
-    }
   </style>
 </head>
 <body>
   <header>
-    <img src="/mnt/data/0357efe5-6fa7-4f9d-9fa7-30e3c5f1847c.jpeg" alt="Logo R&R">
+    <img src="WhatsApp Image 2025-06-16 at 20.34.09.jpeg" alt="Logo R&R">
     <h1>Chá Julino Rafaela e Rafael</h1>
   </header>
 
-  <div class="cadastro">
-    <h2>Faça seu cadastro</h2>
-    <input type="text" id="nome" placeholder="Nome completo" />
-    <input type="email" id="email" placeholder="Email" />
-    <input type="tel" id="telefone" placeholder="Celular" />
-    <button onclick="registrarUsuario()">Cadastrar</button>
-  </div>
+  <h2>Cozinha</h2>
+  <ul id="cozinha"></ul>
 
-  <div id="listas" class="disabled">
-    <h2>Cozinha</h2>
-    <ul id="cozinha"></ul>
+  <h2>Banheiro</h2>
+  <ul id="banheiro"></ul>
 
-    <h2>Banheiro</h2>
-    <ul id="banheiro"></ul>
-
-    <h2>Sala</h2>
-    <ul id="sala"></ul>
-  </div>
+  <h2>Sala</h2>
+  <ul id="sala"></ul>
 
   <script>
     const listaPresentes = {
@@ -160,33 +123,22 @@
       const ul = document.getElementById(containerId);
       listaPresentes[categoria].forEach((item) => {
         const li = document.createElement("li");
-        const button = document.createElement("button");
-        button.textContent = "Escolher";
-        button.onclick = () => {
-          button.disabled = true;
-          button.textContent = "Escolhido";
-        };
-        li.innerHTML = `<span>${item}</span>`;
-        li.appendChild(button);
+        li.innerHTML = `
+          <span>${item}</span>
+          <button onclick="marcarEscolhido(this)">Escolher</button>
+        `;
         ul.appendChild(li);
       });
     }
 
-    function registrarUsuario() {
-      const nome = document.getElementById("nome").value.trim();
-      const email = document.getElementById("email").value.trim();
-      const telefone = document.getElementById("telefone").value.trim();
-
-      if (nome && email && telefone) {
-        document.querySelector(".cadastro").classList.add("disabled");
-        document.getElementById("listas").classList.remove("disabled");
-        renderList("cozinha", "cozinha");
-        renderList("banheiro", "banheiro");
-        renderList("sala", "sala");
-      } else {
-        alert("Por favor, preencha todos os campos para continuar.");
-      }
+    function marcarEscolhido(button) {
+      button.disabled = true;
+      button.textContent = "Escolhido";
     }
+
+    renderList("cozinha", "cozinha");
+    renderList("banheiro", "banheiro");
+    renderList("sala", "sala");
   </script>
 </body>
 </html>
